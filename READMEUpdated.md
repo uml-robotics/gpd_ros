@@ -1,8 +1,8 @@
 # Grasp Pose Detection (GPD)
 
 ## Required Modifications for GPD to compile and run on different machines:
-- In gpd/cfg, the files ros_eigen_params.cfg and ros_eigen_params_vertical.cfg
-    - The wights file path must be updated to match the file path on your system (line 35)
+- In gpd/cfg, the files ros_eigen_params.cfg, ros_eigen_params_vertical.cfg, and ros_eigen_params_verticl_large_bite.cfg
+    - The wights file path must be updated to match the file path on your system (line 32-35)
     - Additionally, the robot hand geometry (lines 7 - 20) must be changed if the class is being used on a robot other than Fetch.
 - Make sure gpd is installed as a library, by using the sudo make install command, as specified in the gpd README.md
 - In each launch file in gpd_ros
