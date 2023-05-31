@@ -5,11 +5,12 @@ GraspDetectionServer::GraspDetectionServer(ros::NodeHandle& node)
 {
   cloud_camera_ = NULL;
 
+  /*
   // set camera viewpoint to default origin
   std::vector<double> camera_position;
   node.getParam("camera_position", camera_position);
   view_point_ << camera_position[0], camera_position[1], camera_position[2];
-
+*/
   std::string cfg_file;
   node.param("config_file", cfg_file, std::string(""));
   grasp_detector_ = new gpd::GraspDetector(cfg_file);
@@ -111,6 +112,9 @@ bool GraspDetectionServer::detectGrasps(gpd_ros::detect_grasps::Request& req, gp
 
     // Publish the detected grasps.
     gpd_ros::GraspConfigList selected_grasps_msg = GraspMessages::createGraspListMsg(grasps, cloud_camera_header_);
+      for(int i = 0; i < 5; i++) {
+          grasps_pub_.publish(selected_grasps_msg);
+      }
     res.grasp_configs = selected_grasps_msg;
     ROS_INFO_STREAM("Detected " << selected_grasps_msg.grasps.size() << " highest-scoring grasps.");
     return true;
